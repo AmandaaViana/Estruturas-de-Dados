@@ -21,31 +21,7 @@ Lista criaLista() {
 } 
 
 Lista insereLista(Lista l, int e) {
-    Lista p, ant, novo;
-
-    novo = (Lista) malloc(sizeof(struct elemento)); 
-    if (novo == NULL) {
-        fprintf(stderr, "Erro na alocação de memória!\n");
-        return l;
-    }
-    novo->dado = e;
-
-    p = l;
-    ant = NULL; 
-
-    while ((p != NULL) && (p->dado < e)) {
-        ant = p; 
-        p = p->prox; 
-    }
-
-    if (ant == NULL) {
-        novo->prox = l;
-        l = novo; 
-    } else {
-        ant->prox = novo;
-        novo->prox = p;  
-    }
-    return l; 
+    
 }
 
 void imprimeLista(Lista l) {
