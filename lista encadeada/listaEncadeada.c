@@ -1,13 +1,3 @@
-/*Implementar um programa que gerencia uma lista encadeada ordenada com alocação dinâmica.
-Cada elemento da lista deve conter um número inteiro.
-Os elementos devem ser inseridos em ordem crescente. Por exemplo, de for inserida a sequência 5, 3, 9, 4, ao imprimir o conteúdo da lista, deve aparecer 3, 4, 5, 9.
-O programa deve oferecer ao usuário as operações:
-- Inserir elemento na lista;
-- Retirar elemento da lista;
-- Buscar um elemento informado está na lista, retornando o endereço do elemento se ele existir na lista, ou NULL se não existir;
-- Imprimir o conteúdo da lista;
-- Contar o número de elementos da lista.
-*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -47,7 +37,7 @@ Lista insereLista(Lista l, int e) {
         ant = p; 
         p = p->prox; 
     }
-    
+
     if (ant == NULL) {
         novo->prox = l;
         l = novo; 
@@ -63,7 +53,11 @@ void imprimeLista(Lista l) {
 
     printf("\nItens da lista: ");
     p = l; 
-    
+
+    if (p == NULL) {
+        printf("Lista vazia.");
+    }
+
     while (p != NULL) {
         printf("%d", p->dado); 
         p = p->prox;
@@ -72,6 +66,7 @@ void imprimeLista(Lista l) {
             printf(", ");
         }
     }
+    printf("\n");
 }
 
 Lista retiraLista (Lista l, int e) {
@@ -87,7 +82,7 @@ Lista retiraLista (Lista l, int e) {
 
     if (p != NULL) { 
         if (ant == NULL) { 
-            l = p->prox; // Atualiza o início da lista
+            l = p->prox;
             free (p); 
         }else {
             ant->prox = p->prox;
@@ -96,20 +91,19 @@ Lista retiraLista (Lista l, int e) {
     } else {
         printf("\nElemento %d não encontrado na lista.\n", e);
     }
-    
-    return(l); // Retorna o novo endereço de início da lista [21]
+
+    return(l);
 }
 
 Lista buscaLista(Lista l, int e) {
-    Lista p; // Ponteiro para percorrer a lista [13]
+    Lista p;
 
     p = l; 
-    
-    // Percorre a lista enquanto não chega ao final E não encontra o elemento [13]
+
     while ((p != NULL) && (p->dado != e)) {
         p = p->prox; 
     }
-    return (p); // Retorna o endereço do nodo ou NULL [13]
+    return (p);
 }
 
 int contaLista(Lista l) {
@@ -117,22 +111,20 @@ int contaLista(Lista l) {
     int cont = 0; 
 
     p = l; 
-    
-    // Percorre a lista até o fim [12]
+
     while (p != NULL) {
         cont++; 
         p = p->prox; 
     }
     return cont; 
-} // [12]
+}
 
-// Estrutura básica do menu e chamada das funções
 int main() {
     Lista minhaLista;
     int valor, opcao;
     Lista encontrado;
 
-    minhaLista = criaLista(); // Inicializa a lista vazia [8]
+    minhaLista = criaLista();
 
     do {
         printf("\n\n--- MENU DE OPÇÕES ---\n");
@@ -143,18 +135,16 @@ int main() {
         printf("5 - Contar o número de elementos\n");
         printf("0 - Sair\n");
         printf("Escolha a opção: ");
-        
-        // Simples leitura de opção
+
         if (scanf("%d", &opcao) != 1) {
-             while (getchar() != '\n'); // Limpa o buffer
-             opcao = -1; // Opção inválida
+             while (getchar() != '\n');
+             opcao = -1;
         }
 
         switch (opcao) {
             case 1:
                 printf("Digite o valor inteiro a ser inserido (em ordem crescente): ");
                 scanf("%d", &valor);
-                // A função insereLista retorna o novo endereço da lista, que deve ser capturado [2, 17]
                 minhaLista = insereLista(minhaLista, valor); 
                 break;
 
@@ -185,7 +175,6 @@ int main() {
 
             case 0:
                 printf("Encerrando o programa.\n");
-                // Em um programa real, a memória deveria ser liberada aqui antes de sair.
                 break;
 
             default:
