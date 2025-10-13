@@ -33,7 +33,6 @@ Lista criaLista() {
 Lista insereLista(Lista l, int e) {
     Lista p, ant, novo;
 
-    // 1. Aloca o novo nodo [5, 17]
     novo = (Lista) malloc(sizeof(struct elemento)); 
     if (novo == NULL) {
         fprintf(stderr, "Erro na alocação de memória!\n");
@@ -41,30 +40,23 @@ Lista insereLista(Lista l, int e) {
     }
     novo->dado = e;
 
-    // 2. Procura o ponto de inserção [18]
     p = l;
     ant = NULL; // Ponteiro para o anterior, inicialmente NULL.
 
-    // Percorre a lista enquanto não chega ao fim E o dado atual for menor que 'e' [18]
     while ((p != NULL) && (p->dado < e)) {
         ant = p; 
         p = p->prox; 
     }
-
-    // 3. Realiza a inserção
     
     if (ant == NULL) {
-        // Caso 1: Lista vazia ou inserção no início (antes do primeiro elemento) [19]
         novo->prox = l;
-        l = novo; // O novo nó se torna o início da lista
+        l = novo; 
     } else {
-        // Caso 2: Inserção no meio ou no final [20]
-        ant->prox = novo; // O próximo do anterior é o novo nó
-        novo->prox = p;   // O próximo do novo nó é 'p' (o nó que era maior ou NULL)
+        ant->prox = novo;
+        novo->prox = p;  
     }
-    
     return l; 
-} // [15, 18]
+}
 
 void imprimeLista(Lista l) {
     Lista p; // Ponteiro auxiliar para percorrer a lista [10]
@@ -72,16 +64,15 @@ void imprimeLista(Lista l) {
     printf("\nItens da lista: ");
     p = l; 
     
-    // Percorre enquanto não chegar ao final da lista (NULL) [10]
     while (p != NULL) {
         printf("%d", p->dado); 
-        p = p->prox; // Avança o ponteiro [11]
+        p = p->prox;
+
         if (p != NULL) {
             printf(", ");
         }
     }
-    printf("\n");
-} // [10, 11]
+}
 
 Lista retiraLista (Lista l, int e) {
     Lista p,    // Ponteiro para o elemento atual [22]
