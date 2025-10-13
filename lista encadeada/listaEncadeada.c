@@ -41,7 +41,7 @@ Lista insereLista(Lista l, int e) {
     novo->dado = e;
 
     p = l;
-    ant = NULL; // Ponteiro para o anterior, inicialmente NULL.
+    ant = NULL; 
 
     while ((p != NULL) && (p->dado < e)) {
         ant = p; 
@@ -59,7 +59,7 @@ Lista insereLista(Lista l, int e) {
 }
 
 void imprimeLista(Lista l) {
-    Lista p; // Ponteiro auxiliar para percorrer a lista [10]
+    Lista p;
 
     printf("\nItens da lista: ");
     p = l; 
@@ -75,30 +75,22 @@ void imprimeLista(Lista l) {
 }
 
 Lista retiraLista (Lista l, int e) {
-    Lista p,    // Ponteiro para o elemento atual [22]
-          ant;  // Ponteiro para o elemento anterior [22]
+    Lista p,ant;  
 
     p = l;
     ant = NULL; 
 
-    // 1. Procura o elemento e [22]
     while ((p!=NULL) && (p->dado != e)) {
         ant = p; 
         p = p->prox;
     }
 
-    // 2. Verifica se o elemento foi encontrado
     if (p != NULL) { 
-        // 3. Remove
-        
-        // Caso a: Removendo o primeiro elemento (ant é NULL) [22]
         if (ant == NULL) { 
             l = p->prox; // Atualiza o início da lista
             free (p); 
-        } 
-        // Caso b: Removendo do meio ou do final [22]
-        else {
-            ant->prox = p->prox; // Conecta o anterior ao próximo do nó removido
+        }else {
+            ant->prox = p->prox;
             free(p); 
         }
     } else {
