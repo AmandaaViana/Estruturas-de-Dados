@@ -21,7 +21,24 @@ Lista criaLista() {
 } 
 
 Lista insereLista(Lista l, int e) {
+    Lista p, ant, novo;
     
+    novo = malloc(sizeof(struct elemento));
+    novo -> dado = e;
+    
+    p = l;
+    ant = p;
+    while ((p != NULL) && (p->dado <e)){
+		ant = p;
+		p = p ->prox;
+		}
+	if(p != ant){
+		ant->prox = novo;
+		} else {
+			l = novo;
+		}
+		novo->prox = p;
+		return l;
 }
 
 void imprimeLista(Lista l) {
@@ -103,7 +120,7 @@ int main() {
     minhaLista = criaLista();
 
     do {
-        printf("\n\n--- MENU DE OPÇÕES ---\n");
+        printf("\n----- MENU DE OPÇÕES -----\n");
         printf("1 - Inserir elemento na lista\n");
         printf("2 - Retirar elemento da lista\n");
         printf("3 - Buscar um elemento\n");
@@ -119,7 +136,7 @@ int main() {
 
         switch (opcao) {
             case 1:
-                printf("Digite o valor inteiro a ser inserido (em ordem crescente): ");
+                printf("Digite o valor inteiro a ser inserido: ");
                 scanf("%d", &valor);
                 minhaLista = insereLista(minhaLista, valor); 
                 break;
