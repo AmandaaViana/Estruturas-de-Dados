@@ -11,7 +11,8 @@ typedef struct Elemento *Arvore;
 
 Arvore criaArvore();
 void insereArvore(Arvore *a, int valor);
-
+void retiraArvore(Arvore *a, int valor);
+void antecessor(Arvore a, Arvore *x);
 Arvore buscaArvore(Arvore a, int valor);
 void preOrdem(Arvore a);
 void inOrdemCre(Arvore a);
@@ -34,7 +35,41 @@ void insereArvore(Arvore *a, int valor){
     else
         printf("\nValor ja existe... tente outro.\n");
 }
+void retiraArvore(Arvore *a, int valor) {
+     Arvore aux;
+    
+     if (*a != NULL) { 
+       if (valor > ((*a)->dado)) { 
+        retiraArvore(&((*a)->dir), valor);
+       } else if (valor < ((*a)->dado)) { 
+           retiraArvore(&((*a)->esq), valor);
+       } else { 
+          if ((*a)->dir == NULL) { 
+             aux = (*a);
+             *a = aux->esq;
+             free(aux);
+          } else if ((*a)->esq == NULL) { 
+               aux = (*a)->dir;
+               free(*a);
+               *a = aux;
+           } else { 
+               antecessor(*a, &((*a)->esq)); 
+             }
+       }
+     }
+}
+void antecessor(Arvore a, Arvore *x) {
+     Arvore aux;
 
+     if ((*x)->dir != NULL) {
+      antecessor(a, &((*x)->dir));
+     } else {
+      a->dado = (*x)->dado;
+      aux = *x;
+      *x = aux->esq;
+      free(aux);
+      }
+}
 
 Arvore buscaArvore(Arvore a, int valor){
     if (a == NULL){ 
@@ -103,7 +138,7 @@ int main() {
             case 2:
                 printf("Digite o valor a ser retirado: ");
                 scanf("%d", &valor);
-                minhaArvore = retiraArvore(minhaArvore, valor);
+                retiraArvore(&minhaArvore, valor);
                 break;
 
             case 3:
@@ -124,11 +159,11 @@ int main() {
 
             case 5:
                 printf("\nPercurso Em Ordem (Crescente): ");
-                inOrdemCre(minhaArvore);
+                inOrdemCre(&minhaArvore);
                 break;
             case 6:
                 printf("\nPercurso Pós-Ordem: ");
-                posOrdem(minhaArvore);
+                posOrdem(&minhaArvore);
                 break;
             case 0:
                 printf("Encerrando o programa.\n");
@@ -141,4 +176,5 @@ int main() {
     } while (opcao != 0);
 
     return 0;
+
 }
