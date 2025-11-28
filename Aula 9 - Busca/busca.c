@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM_10;
+#define TAM_10
 
 void criaLista(Lista);
 void inserir(int vet[], int TAM);
