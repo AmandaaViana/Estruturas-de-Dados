@@ -1,33 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM_10
+#define TAM_MAX 10
 
-void criaLista(Lista);
-void inserir(int vet[], int TAM);
-int buscaSeq(int *vet, int tam, int valor);
+int Lista[TAM_MAX];
+void criaLista(int *Lista);
+void inserir(int vet[]);
+int buscaSeq(int *vet, int valor);
 int buscaBin(int *vet, int inicio, int fim, int valor);
 
-void inserir(int vet[], int TAM){
-    int i,j,temp;
+
+void inserir(int vet[]){
+    int i,j,valor;
     
-    for(i=0, i<TAM, i++){
-        for(j=0, j<TAM, j++){
-            if(vet[j] > vet[j + 1]){
-                temp = vet[j];
-                vet[j] = vet[j + 1];
-                vet[j + 1] = temp;
-            }
-        }
+    for (i=0; i < TAM_MAX; i++ ){
+        printf("Valor inserido:(em ordem)");
+        scanf("%d", &valor);
+        vet[i] = valor;
     }
 }
 
-
-int buscaSeq(int *vet, int tam, int valor){
+int buscaSeq(int *vet, int valor){
     
     int i;
     int pos = -1;
     
-    for (i=0, i<tam; i++){
+    for (i=0; i<TAM_MAX; i++){
         if (valor == vet[i])
         pos = i;
     }
@@ -54,8 +51,8 @@ int buscaBin(int *vet, int inicio, int fim, int valor){
 
 int main(){
     
-    Lista busca[TAM];
-    int opcao, valor;
+    int busca[TAM_MAX];
+    int opcao, valor, pos;
     
     do {
         printf("\n----- MENU DE OPÇÕES -----\n");
@@ -72,18 +69,16 @@ int main(){
 
         switch (opcao) {
             case 1:
-                printf("Digite o valor inteiro a ser inserido: ");
-                scanf("%d", &valor);
-                inserir(busca)
-                printf("Elemento %d inserido.\n", valor);
+                inserir(busca);
                 break;
 
             case 2:
                 printf("Digite o valor a ser buscado: ");
                 scanf("%d", &valor);
-                buscaSeq(busca);
-                if (encontrado != NULL) {
-                    printf("Elemento %d encontrado\n", valor);
+                pos = buscaSeq(busca, valor);
+                
+                if (pos != -1) {
+                    printf("Valor encontrado na posiçao %d\n", pos);
                 } else {
                     printf("Valor %d não encontrado.\n", valor);
                 }
@@ -92,10 +87,9 @@ int main(){
             case 3:
                 printf("Digite o valor a ser buscado: ");
                 scanf("%d", &valor);
-                buscaBin(busca);
-                if (encontrado != NULL) {
-                    printf("Elemento %d encontrado na posiçao [%d]
-                            \n", valor pos);
+                pos = buscaBin(busca,0, TAM_MAX, valor);
+                if (pos != -1) {
+                    printf("Elemento encontrado na posiçao [%d]\n", pos);
                 } else {
                     printf("Valor %d não encontrado.\n", valor);
                 }
