@@ -1,14 +1,26 @@
 #include <stdio.h>
-#include <stbilio.h>
-#define TAM 10
+#include <stdlib.h>
+#define TAM_10;
 
-/*inserir*/
-int inserir(int )
-/*buscar sequencial*/
+void criaLista(Lista);
+void inserir(int vet[], int TAM);
 int buscaSeq(int *vet, int tam, int valor);
-
-/*buscar binaria*/
 int buscaBin(int *vet, int inicio, int fim, int valor);
+
+void inserir(int vet[], int TAM){
+    int i,j,temp;
+    
+    for(i=0, i<TAM, i++){
+        for(j=0, j<TAM, j++){
+            if(vet[j] > vet[j + 1]){
+                temp = vet[j];
+                vet[j] = vet[j + 1];
+                vet[j + 1] = temp;
+            }
+        }
+    }
+}
+
 
 int buscaSeq(int *vet, int tam, int valor){
     
@@ -62,7 +74,7 @@ int main(){
             case 1:
                 printf("Digite o valor inteiro a ser inserido: ");
                 scanf("%d", &valor);
-                
+                inserir(busca)
                 printf("Elemento %d inserido.\n", valor);
                 break;
 
