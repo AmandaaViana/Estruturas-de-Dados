@@ -8,7 +8,7 @@ void mergeSort(int *vet, int *aux, int esq, int dir); //divisão do vetor em vet
 void imprimeVetor(int vet[]);
 
 void inserir(int vet[]){
-    int i,j,valor;
+    int i,valor;
     
     for (i=0; i < TAM_MAX; i++ ){
         printf("Valor inserido:");
